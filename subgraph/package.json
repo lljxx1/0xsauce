@@ -1,0 +1,16 @@
+{
+  "name": "0xsauce-subgraph",
+  "license": "MIT",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --product hosted-service lljxx1/0xsauce-dev",
+    "create-local": "graph create --node http://localhost:8020/ lljxx1/0xsauce-dev",
+    "remove-local": "graph remove --node http://localhost:8020/ lljxx1/0xsauce-dev",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 lljxx1/0xsauce-dev"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.22.3",
+    "@graphprotocol/graph-ts": "0.22.1"
+  }
+}

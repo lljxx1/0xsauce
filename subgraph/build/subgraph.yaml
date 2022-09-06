@@ -1,0 +1,25 @@
+specVersion: 0.0.2
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: proofRegistry
+    network: rinkeby
+    source:
+      address: "0xBcD3e73d06E1F2B546cca0BA0686c466Ac396192"
+      abi: ProofRegistry
+      startBlock: 11310322
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - ProofChanged
+        - Proof
+      abis:
+        - name: ProofRegistry
+          file: proofRegistry/abis/ProofRegistry.json
+      eventHandlers:
+        - event: ProofChanged(address,bytes32,string)
+          handler: handleProofChanged
+      file: proofRegistry/proofRegistry.wasm

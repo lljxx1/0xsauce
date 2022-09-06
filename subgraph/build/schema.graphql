@@ -1,0 +1,9 @@
+type Proof @entity {
+  id: ID!
+  collection: String!
+  merkleRoot: String!
+  url: String!
+  transactionHash: Bytes!
+  transactionTime: Int!
+  accrualBlockNumber: Int!
+}
