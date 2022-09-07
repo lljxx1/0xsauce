@@ -24,4 +24,5 @@
 - [ ] query onchain Proof
 - [ ] swap example
 
-https://api.thegraph.com/subgraphs/name/lljxx1/0xsauce-dev
+## Subgraph
+https://thegraph.com/hosted-service/subgraph/lljxx1/0xsauce-dev
