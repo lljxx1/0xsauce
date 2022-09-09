@@ -27,7 +27,7 @@ async function getAllCollectionData(contract = null) {
       ..._,
       totalStolen: allCounts[index],
     };
-  });
+  }).sort((a, b) => parseFloat(b.floorPrice) - parseFloat(a.floorPrice));
   // console.log(result);
   return result;
 }
