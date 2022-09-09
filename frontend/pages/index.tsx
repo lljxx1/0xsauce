@@ -81,11 +81,14 @@ const TokenQuery: FC = () => {
   const [error, setError] = useState<string|null>(null)
   const [isBlocked, setBlocked] = useState<boolean | null>(null)
   const [lastUpdate, setLastUpdate] = useState<string>('')
+  const [tokenProof, setTokenProof] = useState<any>(null)
   const history = useOracleHistory(contract)
+
 
   const checkToken = async () => {
     setLoading(true)
     setError(null)
+    setTokenProof(null)
     try {
       const api = `${RESERVOIR_API_BASE}/api/getProof?collection=${contract}&tokenId=${tokenId}`
     const proofReq = await fetch(api)
@@ -99,6 +102,7 @@ const TokenQuery: FC = () => {
     console.log('registryAddress', registryAddress)
     const registry = new Contract(registryAddress, ProofRegistryABI, provider)
     console.log('checkToken', proof)
+    setTokenProof(proof);
     const verifyResult = await registry.verify(
       contract,
       proof.tokenId,
@@ -183,12 +187,15 @@ const TokenQuery: FC = () => {
               </button>
             </div>
           </div>
-          <div className="mt-5  text-center">
+        </div>
+
+        <div className="mt-4 text-center">
             { error && (<div>error: {error}</div>)}
             {loading ? <div className="mx-auto" style={{width: "2em"}}>
               <LoadingIcon />
             </div> : isBlocked != null && (
-                <div className="mt-10 text-center">
+               <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 mt-5">
+                <div className="mt-2 text-center">
                   {isBlocked ? (
                     <span className="rounded-md bg-red-600 p-3 text-center text-sm text-white">
                       Blocked
@@ -199,13 +206,18 @@ const TokenQuery: FC = () => {
                     </span>
                   )}
                   <div className="mt-6 text-sm">
-                    Oracle last update in {lastUpdate}
+                    Oracle last update in <span className="text-gray-600">{lastUpdate}</span>
                   </div>
+                  {/* <p className="mt-2 text-sm">isBlock: {tokenProof.isBlock}</p> */}
+                  <p className="mt-2 mb-2">proof:</p>
+                  <pre className="text-gray-400 overflow-hidden text-sm">
+                  {tokenProof.proof.join("\n")}
+                  </pre>
+                </div>
                 </div>
               )
             }
-          </div>
-        </div>
+          </div>        
       </div>
     </div>
   )

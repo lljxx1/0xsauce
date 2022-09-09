@@ -1,6 +1,7 @@
 {
   "scripts": {},
   "dependencies": {
+    "@epnsproject/backend-sdk": "^2.0.0",
     "@pinata/sdk": "^1.1.26",
     "axios": "^0.24.0",
     "axios-https-proxy-fix": "^0.17.1",

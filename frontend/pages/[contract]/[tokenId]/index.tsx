@@ -128,10 +128,9 @@ const Index: NextPage<Props> = ({ collectionId, tokenDetails }) => {
           <div className="reservoir-h5 mb-4 dark:text-white">Token Proof</div>
 
           <p>isBlock: {proof.data?.results[0].isBlock}</p>
-
-          <p>proof:</p>
-          <pre className="text-gray-400">
-            {proof.data?.results[0].proof.join('\n')}
+          <p className="mt-2 mb-2">proof:</p>
+          <pre className="text-gray-400 overflow-hidden">
+          {proof.data?.results[0].proof.join("\n")}
           </pre>
           {/* {tokenDescription && (
         <div className="reservoir-body-2 mt-4 break-words dark:text-white">
