@@ -21,7 +21,7 @@
 #### Frontend
 - [ ] visualize collections
 - [ ] visualize oracle status
-- [ ] query onchain Proof
+- [x] query onchain Proof
 - [ ] swap example
 
 ## Subgraph
