@@ -33,7 +33,7 @@ const TrendingCollectionTable: FC<Props> = ({ fallback }) => {
     : []
 
   const columns = isSmallDevice
-    ? ['Collection', 'Floor Price']
+    ? ['Collection', 'Stolen']
     : ['Collection',  'Stolen', 'Floor Price']
 
   return (
@@ -106,12 +106,6 @@ const TrendingCollectionTable: FC<Props> = ({ fallback }) => {
                   <FormatEth amount={floorPrice} />
                 </td>
                 )}
-
-               
-
-          
-
-              
               </tr>
             )
           })}
