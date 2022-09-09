@@ -34,7 +34,7 @@ const TrendingCollectionTable: FC<Props> = ({ fallback }) => {
 
   const columns = isSmallDevice
     ? ['Collection', 'Floor Price']
-    : ['Collection', 'Floor Price',  'Stolen', 'Supply']
+    : ['Collection',  'Stolen', 'Floor Price']
 
   return (
     <div className="mb-11 overflow-x-auto">
@@ -95,23 +95,21 @@ const TrendingCollectionTable: FC<Props> = ({ fallback }) => {
                 {/* VOLUME */}
 
                 {/* FLOOR PRICE */}
+               
                 <td className="reservoir-body whitespace-nowrap px-6 py-4 dark:text-white">
-                  <FormatEth amount={floorPrice} />
+                  {totalStolen ? formatNumber(+totalStolen) : '-'}
                 </td>
 
-                {/* Stolen */}
+                 {/* Stolen */}
                    {!isSmallDevice && (
                   <td className="reservoir-body whitespace-nowrap px-6 py-4 dark:text-white">
-                    {totalStolen ? formatNumber(+totalStolen) : '-'}
-                  </td>
+                  <FormatEth amount={floorPrice} />
+                </td>
                 )}
 
-                {/* SUPPLY */}
-                {!isSmallDevice && (
-                  <td className="reservoir-body whitespace-nowrap px-6 py-4 dark:text-white">
-                    {supply ? formatNumber(+supply) : '-'}
-                  </td>
-                )}
+               
+
+          
 
               
               </tr>
