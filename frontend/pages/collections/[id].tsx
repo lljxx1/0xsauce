@@ -29,7 +29,7 @@ import useAttributes from 'hooks/useAttributes'
 import * as Tabs from '@radix-ui/react-tabs'
 import { toggleOnItem } from 'lib/router'
 import CollectionActivityTable from 'components/tables/CollectionActivityTable'
-import Sweep from 'components/Sweep'
+// import Sweep from 'components/Sweep'
 import { definitions } from "lib/schema";
 // Environment variables
 // For more information about these variables
@@ -147,12 +147,11 @@ const Home: NextPage<Props> = ({ fallback, id }) => {
   ) : (
     <meta
       name="description"
-      content={collection.data?.collection?.metadata?.description as string}
+      content=""
     />
   )
 
-  const bannerImage = (envBannerImage ||
-    collection?.data?.collection?.metadata?.bannerImageUrl) as string
+  const bannerImage = (envBannerImage) as string
 
   const image = metaImage ? (
     <>
@@ -223,9 +222,6 @@ const Home: NextPage<Props> = ({ fallback, id }) => {
                     {router.query?.attribute_key ||
                     router.query?.attribute_key === '' ? (
                       <>
-                        <SortMenuExplore
-                          setSize={collectionAttributes.setSize}
-                        />
                         <ViewMenu />
                       </>
                     ) : null}
@@ -271,21 +267,14 @@ const Home: NextPage<Props> = ({ fallback, id }) => {
                     </div>
                   )}
                 </div>
-                {router.query?.attribute_key ||
-                router.query?.attribute_key === '' ? (
-                  <ExploreTokens
-                    attributes={collectionAttributes}
-                    viewRef={refCollectionAttributes}
-                  />
-                ) : (
-                  <TokensGrid
+
+                <TokensGrid
                     tokens={tokens}
                     viewRef={refTokens}
                     collectionImage={
-                      collection.data?.collection?.metadata?.imageUrl as string
+                      collection.data?.collection?.thumb as string
                     }
                   />
-                )}
               </div>
             </>
           </Tabs.Content>

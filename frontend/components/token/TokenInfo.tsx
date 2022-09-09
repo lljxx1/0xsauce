@@ -76,7 +76,7 @@ const TokenInfo: FC<Props> = ({ details }) => {
             className="reservoir-h6 font-headings"
             target="_blank"
             rel="noopener noreferrer"
-            href={`https://looksrare.org/collections/${token?.token?.contract}/${token?.token?.tokenId}`}
+            href={`https://looksrare.org/collections/${token?.contract}/${token?.tokenId}`}
           >
             <img
               src="/icons/LooksRare.svg"
@@ -88,7 +88,7 @@ const TokenInfo: FC<Props> = ({ details }) => {
             className="reservoir-h6 font-headings"
             target="_blank"
             rel="noopener noreferrer"
-            href={`https://opensea.io/assets/${token?.token?.contract}/${token?.token?.tokenId}`}
+            href={`https://opensea.io/assets/${token?.contract}/${token?.tokenId}`}
           >
             <img
               src="/icons/OpenSea.svg"
@@ -108,7 +108,7 @@ const TokenInfo: FC<Props> = ({ details }) => {
               className="reservoir-h6 flex items-center gap-2 font-headings text-primary-700 dark:text-primary-100"
               target="_blank"
               rel="noopener noreferrer"
-              href={`https://etherscan.io/address/${token?.token?.contract}`}
+              href={`https://etherscan.io/address/${token?.contract}`}
             >
               {truncateAddress(token?.contract)}
               <FiExternalLink className="h-4 w-4" />
@@ -119,13 +119,13 @@ const TokenInfo: FC<Props> = ({ details }) => {
       <div className="mb-4 flex items-center justify-between">
         <div className="reservoir-subtitle dark:text-white">Token ID</div>
         <div className="reservoir-h6 max-w-[80px] truncate font-headings dark:text-white">
-          {token?.token?.tokenId}
+          {token?.tokenId}
         </div>
       </div>
       <div className="mb-4 flex items-center justify-between">
         <div className="reservoir-subtitle dark:text-white">Token Standard</div>
         <div className="reservoir-h6 font-headings uppercase dark:text-white">
-          {token?.token?.kind}
+          {/* {token?.kind} */}
         </div>
       </div>
       <div className="flex items-center justify-between">
@@ -137,7 +137,7 @@ const TokenInfo: FC<Props> = ({ details }) => {
           title="Refresh token"
           disabled={refreshLoading}
           onClick={() =>
-            refreshToken(`${token?.token?.contract}:${token?.token?.tokenId}`)
+            refreshToken(`${token?.contract}:${token?.tokenId}`)
           }
         >
           Refresh{' '}

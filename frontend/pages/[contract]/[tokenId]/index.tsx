@@ -12,7 +12,7 @@ import Listings from 'components/token/Listings'
 import TokenInfo from 'components/token/TokenInfo'
 import CollectionInfo from 'components/token/CollectionInfo'
 import Owner from 'components/token/Owner'
-import PriceData from 'components/token/PriceData'
+// import PriceData from 'components/token/PriceData'
 import TokenMedia from 'components/token/TokenMedia'
 import { useState } from 'react'
 import { TokenDetails } from 'types/reservoir'
@@ -97,14 +97,12 @@ const Index: NextPage<Props> = ({ collectionId, tokenDetails }) => {
 
   const description = META_DESCRIPTION
     ? metadata.description(META_DESCRIPTION)
-    : metadata.description(
-        `${collection.data?.collection?.metadata?.description as string}`
-      )
+    : '';
 
   const image = META_OG_IMAGE
     ? metadata.image(META_OG_IMAGE)
-    : token?.token?.image
-    ? metadata.image(token?.token?.image)
+    : token?.imageUrl
+    ? metadata.image(token?.imageUrl)
     : null
 
   return (
@@ -114,7 +112,7 @@ const Index: NextPage<Props> = ({ collectionId, tokenDetails }) => {
         {description}
         {image}
       </Head>
-      <div className="col-span-full content-start space-y-4 px-2 md:col-span-4 lg:col-span-5 lg:col-start-2 lg:px-0 2xl:col-span-4 2xl:col-start-3 3xl:col-start-5 4xl:col-start-7">
+      <div className="col-span-full mt-8 content-start space-y-4 px-2 md:col-span-4 lg:col-span-5 lg:col-start-2 lg:px-0 2xl:col-span-4 2xl:col-start-3 3xl:col-start-5 4xl:col-start-7">
         <div className="mb-4">
           <TokenMedia details={details} tokenOpenSea={tokenOpenSea} />
         </div>
@@ -123,7 +121,7 @@ const Index: NextPage<Props> = ({ collectionId, tokenDetails }) => {
           {/* <TokenInfo details={details} /> */}
         </div>
       </div>
-      <div className="col-span-full mb-4 space-y-4 px-2 md:col-span-4 md:col-start-5 lg:col-span-5 lg:col-start-7 lg:px-0 2xl:col-span-5 2xl:col-start-7 3xl:col-start-9 4xl:col-start-11">
+      <div className="col-span-full mt-8 mb-4 space-y-4 px-2 md:col-span-4 md:col-start-5 lg:col-span-5 lg:col-start-7 lg:px-0 2xl:col-span-5 2xl:col-start-7 3xl:col-start-9 4xl:col-start-11">
         <Owner details={details} bannedOnOpenSea={bannedOnOpenSea} />
 
         <article className="col-span-full rounded-2xl border border-gray-300 bg-white p-6 dark:border-neutral-600 dark:bg-black">

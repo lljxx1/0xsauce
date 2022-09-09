@@ -56,9 +56,9 @@ export const recoilCartTotal = selector({
   get: ({ get }) => {
     const arr = get(recoilCartTokens)
 
-    const prices = arr.map(({ floorAskPrice }) => {
-      if (!floorAskPrice) return 0
-      return floorAskPrice
+    const prices = arr.map(_ => {
+      return 0
+      // return floorAskPrice
     })
 
     return prices.reduce(
@@ -178,7 +178,7 @@ const CartMenu: FC = () => {
           )}
         </div>
         <div className="mb-6 grid max-h-[300px] gap-2 overflow-auto">
-          {cartTokens.map(
+          {/* {cartTokens.map(
             (
               { collection, contract, name, image, floorAskPrice, tokenId },
               index
@@ -216,7 +216,7 @@ const CartMenu: FC = () => {
                 </div>
               )
             }
-          )}
+          )} */}
         </div>
 
         <div className="mb-4 flex justify-between">

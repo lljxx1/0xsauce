@@ -13,7 +13,7 @@ import useTokens from 'hooks/useTokens'
 import HeroSocialLinks from 'components/hero/HeroSocialLinks'
 import HeroBackground from 'components/hero/HeroBackground'
 import HeroStats from 'components/hero/HeroStats'
-import Sweep from './Sweep'
+// import Sweep from './Sweep'
 import ReactMarkdown from 'react-markdown'
 import { useMediaQuery } from '@react-hookz/web'
 import { definitions } from "lib/schema";
