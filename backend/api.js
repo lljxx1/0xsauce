@@ -8,6 +8,8 @@ const bodyParser = require("body-parser");
 const app = express();
 const { Asset } = require("./schema");
 const { getProof } = require("./handlers/proof");
+const { getAllCollections, getCollection, getTokens, getToken } = require('./handlers/collection');
+
 const morgan = require("morgan");
 const fs = require("fs");
 const path = require("path");
@@ -29,6 +31,10 @@ app.use(
 app.use(morgan("combined", { stream: accessLogStream }));
 
 app.get("/api/getProof", getProof);
+app.get("/api/collection/getList", getAllCollections);
+app.get("/api/collection", getCollection);
+app.get("/api/tokens", getTokens);
+app.get("/api/token", getToken);
 
 app.get("*", async (req, res) => {
   res.send("Hello");

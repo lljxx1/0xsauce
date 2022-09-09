@@ -18,8 +18,8 @@ async function genProof(collection) {
 
   for (let index = 0; index < allAssets.length; index++) {
     const asset = allAssets[index];
-    const { tokenId, supportsWyvern } = asset;
-    const isBlock = supportsWyvern ? 0 : 1;
+    const { tokenId, supportsWyvern, scamSniffer } = asset;
+    const isBlock = supportsWyvern ? scamSniffer ? 1 : 0 : 1;
     allRows.push([tokenId, isBlock]);
     const leave = ethers.utils.solidityKeccak256(
       ["uint256", "uint256"],
@@ -58,6 +58,7 @@ async function genProof(collection) {
 async function generateForAll() {
   for (let index = 0; index < allCollections.length; index++) {
     const collection = allCollections[index];
+    console.log(`genProof for ${collection.contract}`)
     await genProof(collection.contract);
   }
 }

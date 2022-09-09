@@ -46,26 +46,36 @@ async function snapshotCollection(
         },
       });
       if (isFetched) {
-        console.log("fetched", tokenId);
-        continue;
+        if (isFetched.imageUrl) {
+          // console.log("fetched", tokenId);
+          continue;
+        }
+        console.log('fetch again', `${contract}:${tokenId}`)
       }
     }
 
     try {
       const detail = await fetchAsset(contract, tokenId);
+      if (!detail) {
+        console.log('failed')
+        continue;
+      }
+      const rows = [detail].map((_) => {
+        return {
+          contract,
+          tokenId,
+          name: detail.name,
+          imageOriginalUrl: detail.image_original_url,
+          imageUrl: detail.image_url,
+          imagePreviewUrl: detail.image_preview_url,
+          supportsWyvern: detail.supports_wyvern ? 1 : 0,
+          scamSniffer: 0,
+        };
+      });
+
+      console.log('rows', rows)
       const result = await Asset.bulkCreate(
-        [detail].map((_) => {
-          return {
-            contract,
-            tokenId,
-            name: detail.name,
-            imageOriginalUrl: detail.image_original_url,
-            imageUrl: detail.image_url,
-            imagePreviewUrl: detail.image_preview_url,
-            supportsWyvern: detail.supports_wyvern ? 1 : 0,
-            scamSniffer: 0,
-          };
-        }),
+        rows,
         {
           validate: true,
           updateOnDuplicate: [
@@ -88,9 +98,16 @@ async function snapshotCollection(
   }
 }
 
-(async () => {
-  for (let index = 0; index < allCollections.length; index++) {
-    const collection = allCollections[index];
-    await snapshotCollection(collection.contract, collection);
-  }
-})();
+async function test() {
+  console.log(await checkFromPageAPI('0xed5af388653567af2f388e6224dc7c4b3241c544', '1354'))
+}
+
+test();
+// (async () => {
+
+//   for (let index = 0; index < allCollections.length; index++) {
+//     const collection = allCollections[index];
+//     await snapshotCollection(collection.contract, collection);
+//   }
+
+// })();

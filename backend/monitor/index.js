@@ -83,8 +83,8 @@ async function scanAddress(address) {
 
     await saveLastScan(address, recentBlock);
     if (inWatchCollections.length) {
-        // flag token
-
+        // [TODO] flag token 
+        // Asset.where
     }
 
     if (isTopCollections.length) {
