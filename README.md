@@ -5,8 +5,8 @@
 
 #### Data Source
 - [x] Opensea Snapshot
-- [ ] Onchain-monitor with phishing address (Provide by ScamSniffer, SlowMist)
-
+- [x] Onchain-monitor with phishing address (Provide by ScamSniffer, SlowMist)
+- [x] EPNS Notification 
 #### Smart Contract
 - [x] Proof Registry
 - [ ] Example: onchain-verify && swap
@@ -19,7 +19,7 @@
 - [x] subgraph index proof-change
 
 #### Frontend
-- [ ] visualize collections
+- [x] visualize collections
 - [ ] visualize oracle status
 - [x] query onchain Proof
 - [ ] swap example
