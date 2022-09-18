@@ -7,13 +7,16 @@ const stateFile = __dirname + '/state.json';
 const BlackList = require('./blacklist/scamsniffer+slowmist.json');
 const watchCollections = allCollections.map(c => c.contract);
 const topCollectionIds = topCollections.map(c => c.contract.address);
+const { Asset } = require('../schema');
+
+const { sendNotification } = require('./notify');
 
 let state = {};
 
 async function fetchTransactions(address, size = 200) {
     const url = `https://api.covalenthq.com/v1/1/address/${address}/transactions_v2/?key=${Covalent_API}&page-size=${size}`;
     const req = await fetch(url, {
-        agent: require("proxy-agent")("socks://127.0.0.1:9998"),
+        agent: require("proxy-agent")("socks://127.0.0.1:10000"),
     })
     const result = await req.json();
     return result;
@@ -62,9 +65,6 @@ async function findRecentNFTTransfer(address, lastBlock = 0) {
     const recentBlock = data.length ? data[0].block_height : lastBlock;
     const inWatchCollections = allTokenTransfer.filter(c => watchCollections.includes(c.sender_address));
     const isTopCollections = allTokenTransfer.filter(c => topCollectionIds.includes(c.sender_address));
-    // console.log('isTopCollections', isTopCollections.length)
-    // console.log('inWatchCollections', inWatchCollections.length)
-    // console.log('recentBlock', recentBlock)
     return {
         recentBlock,
         isTopCollections,
@@ -82,20 +82,64 @@ async function scanAddress(address) {
     } = await findRecentNFTTransfer(address, lastBlock);
 
     await saveLastScan(address, recentBlock);
+
     if (inWatchCollections.length) {
-        // [TODO] flag token 
-        // Asset.where
+        for (let index = 0; index < inWatchCollections.length; index++) {
+            const watchToken = inWatchCollections[index];
+            // flag token 
+            await Asset.update({
+                scamSniffer: 1
+            }, {
+                contract: watchToken.sender_address,
+                tokenId: watchToken.tokenId
+            })
+        }
     }
 
     if (isTopCollections.length) {
-        console.log('transfer in top collection', isTopCollections.length)
+        // If token in opensea top 1000 collection, send notification to owner
+        for (let index = 0; index < isTopCollections.length; index++) {
+            const token = isTopCollections[index];
+            const payload = {
+                title: `[Stolen] ${token.sender_name} #${token.tokenId}`,
+                body: `Your ${token.sender_name} #${token.tokenId} has been stolen`
+            }
+            await sendNotification(token.from, payload, {
+                ...payload,
+                cta: '',
+                img: ''
+            })
+        }
     }
 }
 
+
+async function watchAll() {
+    for (let index = 0; index < BlackList.length; index++) {
+        const address = BlackList[index];
+        try {
+            await scanAddress(address);
+        } catch(e) {
+            console.log('scanAddress', e)
+        }
+    }
+}
+
+async function scanTask() {
+    await loadState();
+    for (let index = 0; index < Infinity; index++) {
+        await watchAll();
+        await new Promise((resolve) => {
+            setTimeout(resolve, 60 * 1000 * 30);
+        })
+    }
+}
 
 async function test() {
     await loadState();
     await scanAddress('0xaa18164d0b6139ccb9227de28dad2571e38303c7')
 }
 
-test();
+// test();
+
+scanTask();
