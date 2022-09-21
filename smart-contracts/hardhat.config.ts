@@ -93,32 +93,26 @@ const config: HardhatUserConfig = {
         .mul(10 ** 9)
         .toNumber(),
     },
-    1: {
-      url: `https://mainnet.infura.io/v3/${process.env.MAINNET_INFURA}`,
+    ether: {
+      url: `https://rpc.ankr.com/eth`,
       accounts,
-      timeout: 60000,
-      gasPrice: BigNumber.from(gasPrice)
-        .mul(10 ** 9)
-        .toNumber(),
     },
     rinkeby: {
-      // url: `https://eth-rinkeby.alchemyapi.io/v2/pwORs2Ke8duBN7wLI-e_0OaswaUSoZcx`,
       url: 'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      accounts,
       // gasPrice: BigNumber.from(900)
       //   .mul(10 ** 9)
       //   .toNumber(),
       timeout: 60000,
     },
-    mumbai: {
-      url: 'https://matic-mumbai.chainstacklabs.com',
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
-      gasPrice: BigNumber.from(200)
-        .mul(10 ** 9)
-        .toNumber(),
+    polygon: {
+      url: 'https://polygon-rpc.com/',
+      accounts
     },
+    optimism: {
+      url: 'https://mainnet.optimism.io/',
+      accounts
+    }
   },
   namedAccounts: {
     deployer: 0,
