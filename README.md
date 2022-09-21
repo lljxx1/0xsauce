@@ -26,3 +26,10 @@
 
 ## Subgraph
 https://thegraph.com/hosted-service/subgraph/lljxx1/0xsauce-dev
+
+
+## Deployed ProofRegistry
+- Rinkeby: `0xBcD3e73d06E1F2B546cca0BA0686c466Ac396192`
+- Polygon: `0xBcD3e73d06E1F2B546cca0BA0686c466Ac396192`
+- Optimistic: `0xBcD3e73d06E1F2B546cca0BA0686c466Ac396192`
+- Mainnet: `0x3a5B93f8A8Fd444705F091fAb90EE45f5eEA5963`

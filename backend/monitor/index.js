@@ -8,15 +8,15 @@ const BlackList = require('./blacklist/scamsniffer+slowmist.json');
 const watchCollections = allCollections.map(c => c.contract);
 const topCollectionIds = topCollections.map(c => c.contract.address);
 const { Asset } = require('../schema');
-
+const { EPNS_CHANNEL_KEY, EPNS_CHANNEL } = require('../config/config.json');
 const { sendNotification } = require('./notify');
 
 let state = {};
 
-async function fetchTransactions(address, size = 200) {
+async function fetchTransactions(address, size = 100) {
     const url = `https://api.covalenthq.com/v1/1/address/${address}/transactions_v2/?key=${Covalent_API}&page-size=${size}`;
     const req = await fetch(url, {
-        agent: require("proxy-agent")("socks://127.0.0.1:10000"),
+        // agent: require("proxy-agent")("http://127.0.0.1:9999"),
     })
     const result = await req.json();
     return result;
@@ -83,6 +83,7 @@ async function scanAddress(address) {
 
     await saveLastScan(address, recentBlock);
 
+    console.log('inWatchCollections', inWatchCollections)
     if (inWatchCollections.length) {
         for (let index = 0; index < inWatchCollections.length; index++) {
             const watchToken = inWatchCollections[index];
@@ -90,8 +91,10 @@ async function scanAddress(address) {
             await Asset.update({
                 scamSniffer: 1
             }, {
-                contract: watchToken.sender_address,
-                tokenId: watchToken.tokenId
+                where: {
+                    contract: watchToken.sender_address,
+                    tokenId: watchToken.tokenId
+                }
             })
         }
     }
@@ -104,11 +107,21 @@ async function scanAddress(address) {
                 title: `[Stolen] ${token.sender_name} #${token.tokenId}`,
                 body: `Your ${token.sender_name} #${token.tokenId} has been stolen`
             }
-            await sendNotification(token.from, payload, {
-                ...payload,
-                cta: '',
-                img: ''
-            })
+            console.log(payload)
+            try {
+                await sendNotification(
+                    // token.from,
+                    EPNS_CHANNEL,
+                    payload, 
+                    {
+                        ...payload,
+                        cta: '',
+                        img: ''
+                    }
+                )
+            } catch(e) {
+                console.log('sendNotification.error', e)
+            }
         }
     }
 }
