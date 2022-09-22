@@ -91,7 +91,7 @@ const TokenQuery: FC = () => {
   const [tokenProof, setTokenProof] = useState<any>(null)
   const history = useOracleHistory(contract)
 
-  const rehypePlugins = [[rehypeHighlight, {ignoreMissing: true}]];
+  const rehypePlugins = [rehypeHighlight];
   const remarkPlugins = [remarkSlug, remarkToc];
 
   const markdonw = `# Integration Doc
