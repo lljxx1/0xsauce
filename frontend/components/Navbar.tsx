@@ -50,6 +50,10 @@ const Navbar: FC = () => {
       name: 'Notification',
       url: '/notification',
     },
+    {
+      name: 'Integration',
+      url: '/docs',
+    },
   ]
 
   // if (typeof EXTERNAL_LINKS === 'string') {
