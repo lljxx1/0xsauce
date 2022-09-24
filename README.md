@@ -47,7 +47,7 @@ To address the issue above, 0xsauce will provides three services:
 ## Integration
 
 ### Smart Contract
-```bash
+```solidity
 pragma solidity ^0.8.0;
 
 pragma experimental ABIEncoderV2;
@@ -88,7 +88,7 @@ contract SwapGuard {
 ```
 ### Retrieve Proof
 #### From API
-```bash
+```javascript
 
 async function fetchProof(collection, tokenId) {
     const req = await fetch(`https://api.0xsauce.xyz/api/getProof?collection=${collection}&tokenId=${tokenId}`);
@@ -101,13 +101,13 @@ console.log('proof', proof)
 
 ```
 #### From IPFS
-```bash
+```javascript
 const prooRegistry = new ethers.Contract(registryAddr, RegistryABI, provider);
 const proof = await prooRegistry.getProof(collection);
 console.log('ipfs proof', proof.url)
 ```
 ### Swap
-```bash
+```javascript
 const swapWithGuard = new ethers.Contract(SwapGuardAddr, SwapGuardABI, provider);
 
 const tokenId = 1;
