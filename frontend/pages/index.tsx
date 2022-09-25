@@ -219,6 +219,10 @@ const TokenQuery: FC = () => {
             }
           </div>        
       </div>
+
+      <div className="sm:mx-auto sm:w-full sm:max-w-xl mt-16 py-16">
+          <iframe src="https://pitch.com/embed/899e8793-d767-4dc2-bbfa-b2d94437a52e" allow="fullscreen" allowFullScreen width="560" height="368" style={{border:0}}></iframe>
+        </div>
     </div>
   )
 }
