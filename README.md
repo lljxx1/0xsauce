@@ -35,7 +35,7 @@ Let's get saucy with your NFTs!! <a href="https://0xsauce.xyz/" target="_blank">
 ![Recording 2022-09-24 at 15 29 48](https://user-images.githubusercontent.com/33161265/192085980-45722d3c-396b-455b-b47c-2cb5cfc6f280.gif)
 
 ## Key Features
-With the emergence of more and more decentralized NFT finalization protocols such as NFT AMM, NFT loan, or NFT fractionalization, there is a solid need to source the NFT before a user can trade or perform other financialization tasks. Otherwise, blacklisted NFT will flow into the permissionless decentralized protocols and cause unfair trading for the user. 
+With the emergence of more and more decentralized NFT financialization protocols such as NFT AMM, NFT loan, or NFT fractionalization, there is a solid need to source the NFT before a user can trade or perform other financialization tasks. Otherwise, blacklisted NFT will flow into the permissionless decentralized protocols and cause unfair trading for the user. 
 To address the issue above, 0xsauce will provides three services:
 1. An on-chain NFT source oracle that saves blacklisted NFT item ID with its collection address.
 2. A website( 0xsauce.xyz) that can allow users to check if a specific NFT item is tagged as suspicious.
