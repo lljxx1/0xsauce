@@ -94,7 +94,8 @@ const config: HardhatUserConfig = {
         .toNumber(),
     },
     ether: {
-      url: `https://rpc.ankr.com/eth`,
+      url: 'https://light-little-sanctuary.discover.quiknode.pro/6556bef83624e969dc756ac0219251b786433890/',
+,
       accounts,
     },
     rinkeby: {
